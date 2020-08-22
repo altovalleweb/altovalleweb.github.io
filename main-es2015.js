@@ -241,7 +241,10 @@ __webpack_require__.r(__webpack_exports__);
 
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+        'Access-Control-Allow-Origin': '*'
     })
 };
 class AppService {
@@ -264,7 +267,10 @@ class AppService {
     descargarFactura(factura) {
         return this.http.post(`${this.urlRest.urlapi}factura/descargar`, { 'facturas': [factura] }, {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+                'Access-Control-Allow-Origin': '*'
             }),
             responseType: 'blob'
         })
@@ -279,7 +285,10 @@ class AppService {
     descargarRecibo(recibo) {
         return this.http.post(`${this.urlRest.urlapi}recibo/descargar`, { 'recibo': recibo }, {
             headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+                'Access-Control-Allow-Origin': '*'
             }),
             responseType: 'blob'
         })
@@ -2114,6 +2123,9 @@ __webpack_require__.r(__webpack_exports__);
 const httpOptions = {
     headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
         'Content-Type': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+        'Access-Control-Allow-Origin': '*'
     })
 };
 class AuthService {

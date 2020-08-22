@@ -447,7 +447,10 @@
 
       var httpOptions = {
         headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+          'Access-Control-Allow-Origin': '*'
         })
       };
 
@@ -498,7 +501,10 @@
               'facturas': [factura]
             }, {
               headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+                'Access-Control-Allow-Origin': '*'
               }),
               responseType: 'blob'
             }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
@@ -522,7 +528,10 @@
               'recibo': recibo
             }, {
               headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Headers': 'Content-Type',
+                'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+                'Access-Control-Allow-Origin': '*'
               }),
               responseType: 'blob'
             }).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_3__["map"])(function (response) {
@@ -4337,7 +4346,10 @@
 
       var httpOptions = {
         headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_1__["HttpHeaders"]({
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Headers': 'Content-Type',
+          'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+          'Access-Control-Allow-Origin': '*'
         })
       };
 
