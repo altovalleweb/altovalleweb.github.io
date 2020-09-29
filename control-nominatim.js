@@ -51,10 +51,10 @@
       // A GeoJSON layer
  CapaVector =  new ol.layer.Vector({
   source: new ol.source.Vector({
-    url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
-    'typename=establecimientos_edu:ra_nqn_tec&outputFormat=application/json&srsname=EPSG:3857&',
+    /* url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
+    'typename=establecimientos_edu:ra_nqn_tec&outputFormat=application/json&srsname=EPSG:3857&', */
     // If you want to use a static file, change the previous row to
-    // url: 'data/bptlandmarks.json',
+    url: 'data/radios_tecnica.json',
     format: new ol.format.GeoJSON()
   }),
   style: myStyle,
