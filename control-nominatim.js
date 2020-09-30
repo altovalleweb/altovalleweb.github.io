@@ -149,7 +149,7 @@ var style = [countryStyle, labelStyle];
 
 var vectorLayer = new ol.layer.Vector({
   source: new ol.source.Vector({
-   /*  url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
+    /* url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
     'typename=establecimientos_edu:ra_nqn_tec&outputFormat=application/json&srsname=EPSG:3857&',
     serverType: 'geoserver',
     crossOrigin: 'anonymous', */
@@ -268,19 +268,15 @@ geocoder.on('addresschosen', function(evt) {
 
 function simpleReverseGeocoding(lon, lat) {
 
-  var bingGeoCode     = new GeoCode('bing',   { key: 'AuB_TgCn4vLZq_rFH8btGAYIZiigOwKplCqBqSuG7Shjew1oUPzyeoENK_oEsaKf' });
-  /* fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon='+lon).then(function(response) {
-    return response.json();
-  }).then(function(json) {
-    //document.getElementById('address').innerHTML = json.display_name;
-   $('#mi_direccion').html(`${json.display_name} `);
-    console.log(json)
-  }) */
+   fetch('https://dev.virtualearth.net/REST/v1/Locations/'+lat+','+lon+'?includeNeighborhood=0&key=AuB_TgCn4vLZq_rFH8btGAYIZiigOwKplCqBqSuG7Shjew1oUPzyeoENK_oEsaKf').then(function(response) {
 
-  bingGeoCode.reverse(lat, lon).then(result => {    
-    $('#mi_direccion').html(`${result.raw.resourceSets[0].resources[0].address.addressLine}, ${result.raw.resourceSets[0].resources[0].address.locality}  `);
-    console.log(result)
-  });
+    return response.json();
+  }).then(function(json) {   
+   $('#mi_direccion').html(`${json.resourceSets[0].resources[0].address.addressLine||''}, ${json.resourceSets[0].resources[0].address.adminDistrict2||''}, ${json.resourceSets[0].resources[0].address.adminDistrict||''}`);
+   
+    console.log(json)
+  }) 
+ 
 }
 
 })(window, document);
