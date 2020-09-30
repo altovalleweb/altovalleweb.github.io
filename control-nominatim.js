@@ -148,7 +148,7 @@ var style = [countryStyle, labelStyle];
 
 var vectorLayer = new ol.layer.Vector({
   source: new ol.source.Vector({
-    url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
+    url:'http://190.185.100.145:80/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
     'typename=establecimientos_edu:ra_nqn_tec&outputFormat=application/json&srsname=EPSG:3857&',
     serverType: 'geoserver',
     crossOrigin: 'anonymous',
