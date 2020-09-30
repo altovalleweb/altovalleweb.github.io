@@ -154,7 +154,7 @@ var vectorLayer = new ol.layer.Vector({
     serverType: 'geoserver',
     crossOrigin: 'anonymous', */
     // If you want to use a static file, change the previous row to
-     url: 'data/radios_tecnica.json',
+    url: 'data/radios_tecnica.json',
     format: new ol.format.GeoJSON()
   }),
   style: function(feature) {
@@ -204,21 +204,6 @@ var vectorLayer = new ol.layer.Vector({
 map.addLayer(vectorLayer);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 map.on('singleclick', function (evt) {
 
   //coordenadas = ol.proj.transform(evt.coordinate, 'EPSG:4326', 'EPSG:3587'),
@@ -261,9 +246,10 @@ geocoder.on('addresschosen', function(evt) {
     console.log(evt.coordinate)
     console.log(evt.address.formatted)
     console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
-    
+
+   
     $('#mi_direccion').html(`${evt.address.details.name}`);
-  }, 3000);
+  }, 2000);
 });
 
 function simpleReverseGeocoding(lon, lat) {
