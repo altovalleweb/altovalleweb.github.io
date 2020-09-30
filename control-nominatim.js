@@ -98,7 +98,8 @@ var geocoder = new Geocoder('nominatim', {
   placeholder: 'Calle, Altura y Localidad a Buscar ...',
   sufix: 'Neuquen, Confluencia',
   limit: 15,
-  keepOpen: false,
+  keepOpen: false
+  
 });
 
 map.addControl(geocoder);
@@ -148,12 +149,12 @@ var style = [countryStyle, labelStyle];
 
 var vectorLayer = new ol.layer.Vector({
   source: new ol.source.Vector({
-    /* url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
+     url:'http://geoeducacion.neuquen.gov.ar/proxy/http://geoeducacion.neuquen.gov.ar/geoserver/wfs?service=WFS&version=1.1.0&request=GetFeature&' +
     'typename=establecimientos_edu:ra_nqn_tec&outputFormat=application/json&srsname=EPSG:3857&',
     serverType: 'geoserver',
-    crossOrigin: 'anonymous', */
+    crossOrigin: 'anonymous', 
     // If you want to use a static file, change the previous row to
-     url: 'data/radios_tecnica.json',
+    // url: 'data/radios_tecnica.json',
     format: new ol.format.GeoJSON()
   }),
   style: function(feature) {
@@ -238,7 +239,7 @@ map.on('singleclick', function (evt) {
       
       var geometry = feature.getGeometry();
       var coord = geometry.getCoordinates();
-      
+      console.log(geometry)
       let coordTransform = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326') 
       var content = '<h3>' + feature.get('ESTABLECIM') + '</h3>';
       content += '<h4>' + feature.get('ETIQUETA') + '</h4>';
@@ -260,19 +261,26 @@ geocoder.on('addresschosen', function(evt) {
     console.log(evt.coordinate)
     console.log(evt.address.formatted)
     console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
-
-    $('#mi_direccion').html(`${evt.address.original.details.road} ${evt.address.original.details.house_number|| ''}, ${evt.address.original.details.quarter || evt.address.original.details.suburb}, ${evt.address.original.details.city} `);
+    
+    $('#mi_direccion').html(`${evt.address.details.name}`);
   }, 3000);
 });
 
 function simpleReverseGeocoding(lon, lat) {
-  fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon='+lon).then(function(response) {
+
+  var bingGeoCode     = new GeoCode('bing',   { key: 'AuB_TgCn4vLZq_rFH8btGAYIZiigOwKplCqBqSuG7Shjew1oUPzyeoENK_oEsaKf' });
+  /* fetch('https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+lat+'&lon='+lon).then(function(response) {
     return response.json();
   }).then(function(json) {
     //document.getElementById('address').innerHTML = json.display_name;
    $('#mi_direccion').html(`${json.display_name} `);
     console.log(json)
-  })
+  }) */
+
+  bingGeoCode.reverse(lat, lon).then(result => {    
+    $('#mi_direccion').html(`${result.raw.resourceSets[0].resources[0].address.addressLine}, ${result.raw.resourceSets[0].resources[0].address.locality}  `);
+    console.log(result)
+  });
 }
 
 })(window, document);
