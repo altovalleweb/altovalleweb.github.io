@@ -1,12 +1,10 @@
 (function(win, doc) {
 
   var olview = new ol.View({
-    //center: [-7582964, -4714849],
+  
     projection: 'EPSG:3857',
     center: ol.proj.transform([-68.10752,-38.94265], 'EPSG:4326','EPSG:3857'),
-    //projection: 'EPSG:3587',
-    //center: ol.proj.fromLonLat([-38.94265,-68.10752]),
-    //extent: [ -68.43040,-38.84773,-67.78496,-39.03732],
+  
     extent: ol.proj.transformExtent([ -68.43040,-38.84773,-67.78496,-39.03732], 'EPSG:4326','EPSG:3857'),
     zoom: 12.5,
     minZoom: 2,
@@ -27,33 +25,6 @@
     source: wmsSource
   }),
   
-  
-
-
-
-
-    
-
-
-
-
-
-
-  
-
-  // wmsSource = new TileWMS({
-  //   url: 'http://geoeducacion.neuquen.gov.ar/geoserver/establecimientos_edu/wms',
-  //   params: {'LAYERS': 'establecimientos_edu:Estab_agosto', 'TILED': true},
-  //   serverType: 'geoserver',
-  //   crossOrigin: 'anonymous',
-  // });
-  
-  // wmsLayer = new TileLayer({
-  //   source: wmsSource,
-  // });
-
-  
-
 
   
   baseLayer = new ol.layer.Tile({
@@ -81,18 +52,6 @@
 var geocoder = new Geocoder('nominatim', {
   provider: 'bing',
   key:'AuB_TgCn4vLZq_rFH8btGAYIZiigOwKplCqBqSuG7Shjew1oUPzyeoENK_oEsaKf',
-  //countryIso2:'AR',
-  //userRegion: 'AR',
- // userMapView:  ['-38.84773', '-68.43040','-39.03732','-67.78496'],
-  //city: 'Neuquen',
-  //town: 'Confluencia',
-  //postCode: '8300',
-  //boundingbox:  ['-38.84773', '-68.43040','-39.03732','-67.78496'],
-
-// (busqueda por icono de Lupa)
-//targetType: 'glass-button',  
- 
-// (busqueda por Text Input)
   targetType: 'text-input',    
   lang: 'es',
   placeholder: 'Calle, Altura y Localidad a Buscar ...',
@@ -213,13 +172,15 @@ map.on('singleclick', function (evt) {
    //console.log('By Click:')
    //console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
    //popup.show(evt.coordinate, ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-  
-
-
+   
+   
    var feature = map.forEachFeatureAtPixel(evt.pixel,
-    function(feature, layer) {
-      return feature;
+    function(feature, layer) {      
+      if (feature.id_.includes('ra_nqn')){
+        return feature;
+      }
     });
+   
   if (feature) {
       
       var geometry = feature.getGeometry();
