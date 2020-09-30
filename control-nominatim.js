@@ -237,10 +237,10 @@ map.on('singleclick', function (evt) {
       var geometry = feature.getGeometry();
       var coord = geometry.getCoordinates();
       
-
+      let coordTransform = ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326') 
       var content = '<h3>' + feature.get('ESTABLECIM') + '</h3>';
       content += '<h4>' + feature.get('ETIQUETA') + '</h4>';
-      content += '<h5>' + ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326') + '</h5>';
+      content += '<h5>' + coordTransform + '</h5>';
       simpleReverseGeocoding(coordTransform[0],coordTransform[1])
       $('#mi_escuela').html(`${feature.get('ESTABLECIM')}`);
       popup.show(evt.coordinate, content);
