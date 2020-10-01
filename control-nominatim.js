@@ -172,14 +172,8 @@ map.on('singleclick', function (evt) {
    //console.log('By Click:')
    //console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
    //popup.show(evt.coordinate, ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'));
-   
-   
-   var feature = map.forEachFeatureAtPixel(evt.pixel,
-    function(feature, layer) {      
-      if (feature.id_.includes('ra_nqn')){
-        return feature;
-      }
-    });
+      
+  let feature = getFeature(evt.pixel)
    
   if (feature) {
       
@@ -200,15 +194,22 @@ map.on('singleclick', function (evt) {
 });
 
 //Listen when an address is chosen
-geocoder.on('addresschosen', function(evt) {
+geocoder.on('addresschosen', function(evt) {  
+
   window.setTimeout(function() {
     popup.show(evt.coordinate, evt.address.formatted);
+    let feature = getFeature(map.getPixelFromCoordinate(evt.coordinate))
+     if (feature) $('#mi_escuela').html(`${feature.get('ESTABLECIM')}`);
+
     console.log('By Geocoder:')
     console.log(evt.coordinate)
     console.log(evt.address.formatted)
-    console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))
+    console.log(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'))  
+    console.log(ol.proj.fromLonLat(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326')))
 
-   
+    
+    
+    
     $('#mi_direccion').html(`${evt.address.details.name}`);
   }, 2000);
 });
@@ -219,11 +220,21 @@ function simpleReverseGeocoding(lon, lat) {
 
     return response.json();
   }).then(function(json) {   
-   $('#mi_direccion').html(`${json.resourceSets[0].resources[0].address.addressLine||''}, ${json.resourceSets[0].resources[0].address.adminDistrict2||''}, ${json.resourceSets[0].resources[0].address.adminDistrict||''}`);
-   
-    console.log(json)
+   $('#mi_direccion').html(`${json.resourceSets[0].resources[0].address.addressLine||''}, ${json.resourceSets[0].resources[0].address.adminDistrict2||''}, ${json.resourceSets[0].resources[0].address.adminDistrict||''}`);   
   }) 
  
+}
+
+
+function getFeature(pixel){
+  var feature = map.forEachFeatureAtPixel(pixel,
+    function(feature, layer) {      
+      if (feature.id_.includes('ra_nqn')){
+        return feature;
+      }
+    });
+
+    return feature
 }
 
 })(window, document);
