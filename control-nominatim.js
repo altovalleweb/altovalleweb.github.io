@@ -65,7 +65,75 @@ map.addControl(geocoder);
 map.addOverlay(popup);
 
 
+ /* Obtenemos la localizacion actual en caso de existir */
+ if (navigator.geolocation) {
+  console.log("El navegador si acepta geolocalización")
+   obtener_posicion_actual();
+ }
+ else {
+   console.log("El navegador no acepta geolocalización")
+ }
 
+ function obtener_posicion_actual() {
+  
+   var options = {
+     enableHighAccuracy: true,
+     timeout: 5000,
+     maximumAge: 0
+   };
+    navigator.geolocation.getCurrentPosition(procesar_posicion, procesar_error, options);
+
+ }
+
+
+ function procesar_posicion(posicion) {
+   var latitud = posicion.coords.latitude;
+   var longitud = posicion.coords.longitude;
+   var precision = posicion.coords.accuracy;
+   
+   console.log("Latitud: " + latitud)
+   console.log("Longitud: " + longitud)
+   console.log("Precisión: " + precision)
+
+   var iconFeature = new ol.Feature({
+     geometry: new ol.geom.Point(ol.proj.fromLonLat([longitud,latitud])),
+     name: 'Ubicacion'
+     
+   });
+   
+
+   var iconStyle = new ol.style.Style({
+     image: new ol.style.Icon(/** @type {olx.style.IconOptions} */ ({
+       anchor: [0.5, 46],
+       anchorXUnits: 'fraction',
+       anchorYUnits: 'pixels',
+       src: 'assets/home.ico',
+       scale: .10 
+     }))
+   });
+
+   iconFeature.setStyle(iconStyle);
+
+   var vectorSource = new ol.source.Vector({
+     features: [iconFeature]
+   });
+
+   var vectorLayer = new ol.layer.Vector({
+     source: vectorSource
+   });
+   
+   map.addLayer( vectorLayer);
+
+  
+ }
+
+ function procesar_error(error) {
+      
+   // Analizar el error que se envió desde el API
+   console.log(error);
+   
+ }
+ /* Fin ubicacion actual */
 
 
 var vectorSource = new ol.source.Vector({
