@@ -9,7 +9,7 @@ class MapService {
       });
 
       const result = await fetch(
-        "www.foodchoice.es/foodchoicebe/rest/WSGuardaZona",
+        "https://cors-anywhere.herokuapp.com/www.foodchoice.es/foodchoicebe/rest/WSGuardaZona",
         {
           method: "POST",
           body: bodyRequest,
@@ -31,7 +31,7 @@ class MapService {
       ZonaId: zonaId,
     });
 
-    return fetch("www.foodchoice.es/foodchoicebe/rest/WSDevuelveZonas", {
+    return fetch("https://cors-anywhere.herokuapp.com/www.foodchoice.es/foodchoicebe/rest/WSDevuelveZonas", {
       method: "POST",
       body: bodyRequest,
       headers: {
