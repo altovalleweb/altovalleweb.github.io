@@ -1,8 +1,16 @@
 
 .container{
+	display: grid;
+	grid-template-columns: 1fr;
+	column-gap: 20px;
+	row-gap: 20px;
     width: 90%;
     max-width: 1000px;
     margin:20px auto;
+  }
+
+ .item-action{
+	justify-self: center;
   }
 
 #map { height: 450px; }

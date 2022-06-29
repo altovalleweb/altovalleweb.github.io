@@ -21,18 +21,23 @@
 
     <script src="./app/app.js"></script>
     <script src="./app/js/map.class.js"></script>
+    <script src="./app/js/map.service.js"></script>
+    <script src="./app/js/utils.class.js"></script>
+    <script src="./app/js/notification.class.js"></script>
+    
 </head>
 <body>
     
         <div class="container">       
             <div id="map"></div>
-            <div style="margin-top:10px;">
-                <button class="myButton" onclick="onObtenerCapa()">Obtener Capa</button>
+            <div class="item-action">
+                <button class="myButton" id="guardarZonaBtn" onclick="onGuardarZona()">Guardar Zona</button>
             </div>
-           
-            <div id="layers">
-                
+
+            <div id="notificaciones">
+
             </div>
+
         </div>
     
 </body>
