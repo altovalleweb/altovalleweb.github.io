@@ -9,7 +9,7 @@ class MapService {
       });
 
       const result = await fetch(
-        "https://api.codetabs.com/v1/proxy?quest=www.foodchoice.es/foodchoicebe/rest/WSGuardaZona",
+        "https://cors-proxy.htmldriven.com/?url=www.foodchoice.es/foodchoicebe/rest/WSGuardaZona",
         {
           method: "POST",
           body: bodyRequest,
@@ -31,7 +31,7 @@ class MapService {
       ZonaId: zonaId,
     });
 
-    return fetch("https://api.codetabs.com/v1/proxy?quest=www.foodchoice.es/foodchoicebe/rest/WSDevuelveZonas", {
+    return fetch("https://cors-proxy.htmldriven.com/?url=www.foodchoice.es/foodchoicebe/rest/WSDevuelveZonas", {
       method: "POST",
       body: bodyRequest,
       headers: {
